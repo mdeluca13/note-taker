@@ -37,14 +37,29 @@ app.post('/api/notes', (req, res) => {
   err ? console.log(err) : console.log('Working'))
 });
 
+app.get('/api/notes/:id', (req, res) => {
+  console.log(req.params)
+  const notes = req.params.id.toLowerCase();
+
+ 
+  for (let i = 0; i < noteData.length; i++) {
+    if (notes === noteData[i].term.toLowerCase()) {
+      return res.json(noteData[i]);
+    }
+  }
+
+
+  return res.json('No match found');
+});
+
 // Delete note route
 app.delete('/api/notes/:id', (req, res) => {
   console.log('req.params: ',req.params)
-  // Coerce the specific search term to lowercase
+
   const requestedNote = req.params.id.toLowerCase();
   console.log('requestedNote: ',requestedNote)
 
-  // Iterate through the note name name to check if it matches `req.params.notes`
+
   const noteToDelete = noteData.find(el => el.id === requestedNote);
   const i = noteData.indexOf(noteToDelete);
   noteData.splice(i, 1);
