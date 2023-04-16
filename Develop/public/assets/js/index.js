@@ -161,12 +161,12 @@ const renderNoteList = async (notes) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
 
-    noteListItems.push(li);
-    li.addEventListener('click', function () {
-      console.log('click', note);
-      activeNote = note;
-      renderActiveNote();
-    })
+    // noteListItems.push(li);
+    // li.addEventListener('click', function () {
+    //   console.log('click', note);
+    //   activeNote = note;
+    //   renderActiveNote();
+    // })
   });
 
   if (window.location.pathname === '/notes') {
