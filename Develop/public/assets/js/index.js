@@ -71,11 +71,9 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes()
-    renderActiveNote()
-    console.log('new note saved but no refresh')
-  });
+  saveNote(newNote);
+  getAndRenderNotes();
+  renderActiveNote(); 
 };
 
 // Delete the clicked note
@@ -119,7 +117,6 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
-  console.log(`notes from index ${JSON.stringify(notes)}`);
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
@@ -165,6 +162,11 @@ const renderNoteList = async (notes) => {
     li.dataset.note = JSON.stringify(note);
 
     noteListItems.push(li);
+    li.addEventListener('click', function () {
+      console.log('click', JSON.stringify(note));
+      activeNote = JSON.stringify(note);
+      renderActiveNote();
+    })
   });
 
   if (window.location.pathname === '/notes') {
@@ -180,6 +182,6 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
-}
+};
 
 getAndRenderNotes();
