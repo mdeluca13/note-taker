@@ -44,14 +44,14 @@ const saveNote = (note) =>
   });
 
 const deleteNote = (id) =>
-  console.log('api fetch id: ', id);
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+});
 
+// Render Active Note Function to display on right
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
@@ -68,13 +68,13 @@ const renderActiveNote = () => {
   }
 };
 
+// Save notes
 const handleNoteSave = () => { 
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
     id: noteTitle.value.split(" ").join("-").toLowerCase().concat("-", noteText.value.split(" ").join("-").toLowerCase())
   };
-  // console.log(newNote.id);
   saveNote(newNote);
   getAndRenderNotes();
   renderActiveNote(); 
@@ -91,8 +91,6 @@ const handleNoteDelete = (e) => {
   if (activeNote.id === noteId) {
     activeNote = {};
   }
-  console.log(activeNote);
-  console.log(noteId);
   deleteNote(noteId)
   getAndRenderNotes();
   renderActiveNote();
@@ -111,6 +109,7 @@ const handleNewNoteView = () => {
   renderActiveNote();
 };
 
+// Rendering save button
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
