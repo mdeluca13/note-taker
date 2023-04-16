@@ -53,7 +53,7 @@ const deleteNote = (id) =>
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
-  if (activeNote.id) {
+  if (activeNote.title) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
@@ -82,9 +82,9 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const note = e.target;
-  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  const noteId = JSON.parse(note.parentElement.getAttribute('data-note'));
 
-  if (activeNote.id === noteId) {
+  if (activeNote === noteId) {
     activeNote = {};
   }
 
@@ -102,7 +102,7 @@ const handleNoteView = (e) => {
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
-const handleNewNoteView = (e) => {
+const handleNewNoteView = () => {
   activeNote = {};
   renderActiveNote();
 };
@@ -126,13 +126,13 @@ const renderNoteList = async (notes) => {
 
   // Returns HTML element with or without a delete button
   const createLi = (text, delBtn = true) => {
-    const liEl = document.createElement('li')
-    liEl.classList.add('list-group-item')
+    const liEl = document.createElement('li');
+    liEl.classList.add('list-group-item');
 
-    const spanEl = document.createElement('span')
-    spanEl.classList.add('list-item-title')
-    spanEl.innerText = text
-    spanEl.addEventListener('click', handleNoteView)
+    const spanEl = document.createElement('span');
+    spanEl.classList.add('list-item-title');
+    spanEl.innerText = text;
+    spanEl.addEventListener('click', handleNoteView);
 
     liEl.append(spanEl);
 
@@ -160,13 +160,7 @@ const renderNoteList = async (notes) => {
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
-
     noteListItems.push(li);
-    // li.addEventListener('click', function () {
-    //   console.log('click', note);
-    //   activeNote = note;
-    //   renderActiveNote();
-    // })
   });
 
   if (window.location.pathname === '/notes') {
