@@ -38,21 +38,28 @@ app.post('/api/notes', (req, res) => {
 });
 
 // Delete note route
-// app.get('/api/notes/:notes', (req, res) => {
-//   console.log(req.params)
-//   // Coerce the specific search term to lowercase
-//   const requestedNote = req.params.notes.toLowerCase();
+app.delete('/api/notes/:id', (req, res) => {
+  console.log('req.params: ',req.params)
+  // Coerce the specific search term to lowercase
+  const requestedNote = req.params.id.toLowerCase();
+  console.log('requestedNote: ',requestedNote)
 
-//   // Iterate through the note name name to check if it matches `req.params.notes`
+  // Iterate through the note name name to check if it matches `req.params.notes`
+  const noteToDelete = noteData.find(el => el.id === requestedNote);
+  const i = noteData.indexOf(noteToDelete);
+  noteData.splice(i, 1);
+  fs.writeFile('./db/db.json', JSON.stringify(noteData), (err) => 
+    err ? console.log(err) : console.log('Working'));
+
 //   for (let i = 0; i < noteData.length; i++) {
-//     if (requestedNote === noteData[i].notes.toLowerCase()) {
+//     if (requestedNote === noteData[i].id.toLowerCase()) {
 //       return res.json(noteData[i]);
 //     }
 //   }
 
 //   // Return a message if the term doesn't exist in our DB
 //   return res.json('No match found');
-// });
+});
 
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, 'public/index.html'))
