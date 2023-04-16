@@ -1,3 +1,4 @@
+// Variable Declaration
 let noteTitle;
 let noteText;
 let saveNoteBtn;
