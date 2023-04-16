@@ -37,6 +37,7 @@ app.post('/api/notes', (req, res) => {
   err ? console.log(err) : console.log('Working'))
 });
 
+// Delete note route
 // app.get('/api/notes/:notes', (req, res) => {
 //   console.log(req.params)
 //   // Coerce the specific search term to lowercase
