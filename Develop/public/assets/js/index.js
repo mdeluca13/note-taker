@@ -163,8 +163,8 @@ const renderNoteList = async (notes) => {
 
     noteListItems.push(li);
     li.addEventListener('click', function () {
-      console.log('click', JSON.stringify(note));
-      activeNote = JSON.stringify(note);
+      console.log('click', note);
+      activeNote = note;
       renderActiveNote();
     })
   });
