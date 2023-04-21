@@ -18,6 +18,7 @@ You will also have to run command in node.JS terminal >> npm install
 2. You can then open [http://localhost:3001](http://localhost:3001) in your browser to view the program. 
 3. Click Get Started on the homepage to open the note taking section of the site. 
 4. From here, you can add new notes, view previous notes and delete unnecessary notes. 
+5. You can visit the [deployed site here](https://mdeluca13-notetaker.herokuapp.com/).
 
 ![Image of Notes Page](Assets/image.jpeg)
 
