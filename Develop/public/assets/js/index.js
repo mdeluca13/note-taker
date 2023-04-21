@@ -68,12 +68,17 @@ const renderActiveNote = () => {
   }
 };
 
+function idCreator() {
+  let idVar = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  return idVar;
+}
+  
 // Save notes
 const handleNoteSave = () => { 
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
-    id: noteTitle.value.split(" ").join("-").toLowerCase().concat("-", noteText.value.split(" ").join("-").toLowerCase())
+    id: idCreator()
   };
   saveNote(newNote);
   getAndRenderNotes();
